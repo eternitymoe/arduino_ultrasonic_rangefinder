@@ -1,7 +1,7 @@
 /*
 Arduino ultrasonic rangefinder Source code
 
-Created on November 16 2022 by eternitymoe; Modified on November 17 2022 02:10 EST;
+Created on November 16 2022 by eternitymoe; Modified on November 17 2022 07:37 EST;
 This project is licensed under the MIT license (https://gist.github.com/eternitymoe/88bb61cfe5665da47f00ab8e5f240d89)
 
 Components:
@@ -44,14 +44,14 @@ void distanceOutput(double echoDuration) { // function for outputing distance to
         String outofrangeError = ("Measuring range is 2 ~ 400 cm, but got " + (String)distanceCm); // concatenate the string for out-of-range error message
         if (distanceCm != 0) {  // if the distance value reported is not 0, the sensor should be working but out of measuring range
             Serial.println("[+" + (String)millis() + "ms] Out of range! " + outofrangeError); // print out-of-range error message on the Serial Monitor
-            lcdscrollingLine2("Out of range!", ("Range is 2-400cm,But got ~" + (String)(roundDecimal2p(distanceCm)) + "cm")); // call lcdscrollingLine2() function to print a scrolling error message on the LCD Screen
+            lcdscrollingOutputl2("Out of range!", ("Range is 2-400cm,But got ~" + (String)(roundDecimal2p(distanceCm)) + "cm")); // call lcdscrollingOutputl2() function to print a scrolling error message on the LCD Screen
         }
         else { // the distance value reported 0, the sensor is probably not connected or doesn't working
             Serial.println("[+" + (String)millis() + "ms] Out of range! " + outofrangeError + " (Is it connected?)"); // print out-of-range error message with a notice about the abnormal distance value on the Serial Monitor
-            lcdscrollingLine2("Out of range!", "Check the sensor connection!"); // call lcdscrollingLine2() function to print a scrolling error message on the LCD Screen
+            lcdscrollingOutputl2("Out of range!", "Check the sensor connection!"); // call lcdscrollingOutputl2() function to print a scrolling error message on the LCD Screen
         }
     }
-    else {
+    else { // the distance value reported seems in measuring range, printing it
         Serial.println("[+" + (String)millis() + "ms] Measured distance: " + (String)distanceCm + " cm / " + (String)distanceIn + " inches");  // print the log of measured distance on the Serial Monitor
         lcdScr.clear(); // clear all characters on the LCD Screen
         lcdScr.setCursor(0, 0); // let the LCD Screen start print at the 1st-row 1st-character position
@@ -64,7 +64,7 @@ void distanceOutput(double echoDuration) { // function for outputing distance to
 }
 
 // original code by dedekeyser (https://forum.arduino.cc/t/16x2-lcd-one-line-scrolling-one-stationary/406501)
-void lcdscrollingLine2(String line1Text, String line2Text) { // function for printing a scrolling message on the LCD Screen (only used for error messages due to it takes too much cpu time)
+void lcdscrollingOutputl2(String line1Text, String line2Text) { // function for printing a scrolling message on the LCD Screen (only used for error messages due to it takes too much cpu time)
     lcdScr.clear(); // clear all characters on the LCD Screen
     lcdScr.setCursor(0, 0); // let the LCD Screen start print at the 1st-row 1st-character position
     lcdScr.print(line1Text); // print out-of-range warning on the LCD Screen
