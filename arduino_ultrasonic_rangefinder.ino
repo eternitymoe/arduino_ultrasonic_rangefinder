@@ -1,7 +1,7 @@
 /*
 Arduino ultrasonic rangefinder Source code
 
-Created on November 16 2022 by eternitymoe; Modified on November 17 2022 07:37 EST;
+Created on November 16 2022 by eternitymoe; Modified on November 17 2022 07:55 EST;
 This project is licensed under the MIT license (https://gist.github.com/eternitymoe/88bb61cfe5665da47f00ab8e5f240d89)
 
 Components:
@@ -44,11 +44,11 @@ void distanceOutput(double echoDuration) { // function for outputing distance to
         String outofrangeError = ("Measuring range is 2 ~ 400 cm, but got " + (String)distanceCm); // concatenate the string for out-of-range error message
         if (distanceCm != 0) {  // if the distance value reported is not 0, the sensor should be working but out of measuring range
             Serial.println("[+" + (String)millis() + "ms] Out of range! " + outofrangeError); // print out-of-range error message on the Serial Monitor
-            lcdscrollingOutputl2("Out of range!", ("Range is 2-400cm,But got ~" + (String)(roundDecimal2p(distanceCm)) + "cm")); // call lcdscrollingOutputl2() function to print a scrolling error message on the LCD Screen
+            lcdscrollingOutputl2("Out of range!", ("Range is 2-400cm,But got ~" + (String)(roundDecimal2p(distanceCm)) + "cm")); // call lcdscrollingOutputl2() function to print a line2-scrolling error message on the LCD Screen
         }
         else { // the distance value reported 0, the sensor is probably not connected or doesn't working
             Serial.println("[+" + (String)millis() + "ms] Out of range! " + outofrangeError + " (Is it connected?)"); // print out-of-range error message with a notice about the abnormal distance value on the Serial Monitor
-            lcdscrollingOutputl2("Out of range!", "Check the sensor connection!"); // call lcdscrollingOutputl2() function to print a scrolling error message on the LCD Screen
+            lcdscrollingOutputl2("Out of range!", "Check the sensor connection!"); // call lcdscrollingOutputl2() function to print a line2-scrolling error message on the LCD Screen
         }
     }
     else { // the distance value reported seems in measuring range, printing it
@@ -75,7 +75,7 @@ void lcdscrollingOutputl2(String line1Text, String line2Text) { // function for 
     else if ((line2Text.length()) > 39) { // (!!!) Due to RAM constraints, strings longer than 39 characters are too buggy to be output to the display
         Serial.println("[Error] Line 2 string is too long (> 39) to scrolling print on the LCD Screen"); // print the error message about too long string on Serial Monitor
     }
-    else { // when 16 < length of line2 < 40, scroll the line2
+    else { // when 16 < (length of line2) < 40, scroll the line2 & let line1 "visually" no changes
         char line2charArray[40]; // create a character list of the same length of error message line2 string 
         lcdScr.setCursor(0, 1); // let the LCD Screen start print at the 2nd-row 1st-character position
         line2Text.toCharArray(line2charArray, 40); // put the error message from the string into the character list
