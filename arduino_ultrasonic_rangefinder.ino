@@ -1,7 +1,7 @@
 /*
 Arduino ultrasonic rangefinder Source code
 
-Created on November 16 2022 by eternitymoe; Modified on November 17 2022 07:55 EST;
+Created on November 16 2022 by eternitymoe; Modified on November 17 2022 08:00 EST;
 This project is licensed under the MIT license (https://gist.github.com/eternitymoe/88bb61cfe5665da47f00ab8e5f240d89)
 
 Components:
@@ -96,5 +96,5 @@ void lcdscrollingOutputl2(String line1Text, String line2Text) { // function for 
 
 void loop() { // built-in loop() function for codes to looping
     distanceOutput(ultrasonicMeasure()); // call functions for a measurement attempt
-    delay(100); // delay 100 ms between 2 measurement attempts
+    delay(100); // delay 100 ms before starting next measurement attempt
 }
