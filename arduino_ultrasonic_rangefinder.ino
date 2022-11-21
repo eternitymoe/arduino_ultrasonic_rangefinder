@@ -82,14 +82,14 @@ void lcdscrollingOutputl2(String line1Text, String line2Text) { // function for 
         for (int i = 0; i <= 16; i++) { // printing first 16 characters
             lcdScr.write(line2charArray[i]); // print the first 16 characters to the LCD Screen
         }
-        delay(100); // delay 100 ms for reading the text
+        delay(200); // delay 200 ms for reading the text
         for (int j = 17; j <= (line2Text.length()); j++) { // begin printing from character #17 onward
             lcdScr.write(line2charArray[j]); // write the j-th character (for now it will be off-screen).
             lcdScr.scrollDisplayLeft(); // scroll the text left one character-space.
             lcdScr.setCursor(j-16,0); // set the cursor to the (visually) 1st-character slot on the 1st-row
             lcdScr.print(line1Text); // re-print the row 1 message
             lcdScr.setCursor(j+1,1); // set the cursor one character space to the right of the last printed character on row 2
-            delay(100); // delay 100 ms for reading the text
+            delay(200); // delay 200 ms for reading the text
         }
     }
 }
