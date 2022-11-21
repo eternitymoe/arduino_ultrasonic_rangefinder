@@ -44,7 +44,7 @@ void distanceOutput(double echoDuration) { // function for outputing distance to
         String outofrangeError = ("Measuring range is 2 ~ 400 cm, but got " + (String)distanceCm); // concatenate the string for out-of-range error message
         if (distanceCm != 0) {  // if the distance value reported is not 0, the sensor should be working but out of measuring range
             Serial.println("[+" + (String)millis() + "ms] Out of range! " + outofrangeError); // print out-of-range error message on the Serial Monitor
-            lcdscrollingOutputl2("Out of range!", ("Range is 2-400cm,But got ~" + (String)(roundDecimal2p(distanceCm)) + "cm")); // call lcdscrollingOutputl2() function to print a line2-scrolling error message on the LCD Screen
+            lcdscrollingOutputl2("Out of range!", ("Range is 2-400cm, But got " + (String)(roundDecimal2p(distanceCm)) + "cm")); // call lcdscrollingOutputl2() function to print a line2-scrolling error message on the LCD Screen
         }
         else { // the distance value reported 0, the sensor is probably not connected or doesn't working
             Serial.println("[+" + (String)millis() + "ms] Out of range! " + outofrangeError + " (Is it connected?)"); // print out-of-range error message with a notice about the abnormal distance value on the Serial Monitor
